@@ -29,5 +29,8 @@ steps:
 
 - bash: |
     which bash
-    echo curl https://artifactory-unified.soleng-us.jfrog.team/xray/api/v1/system/ping
   displayName: Bash script
+
+- script: | 
+    ./healthcheck.sh
+displayName: curl Execute
