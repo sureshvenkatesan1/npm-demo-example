@@ -21,5 +21,8 @@
     "send": "^0.16.2",
     "socket.io": "2.3.0",
     "url-parse": "1.4.7"
+  },
+  "publishConfig":{
+    "registry":"https://swampup201.jfrog.io/artifactory/api/npm/su201-npm/"
   }
 }
