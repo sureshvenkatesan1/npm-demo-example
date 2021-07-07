@@ -32,5 +32,5 @@ steps:
   displayName: Bash script
 
 - script: | 
-    ./healthcheck.sh
+    .scripts/healthcheck.sh
   displayName: curl Execute
