@@ -29,8 +29,6 @@ steps:
 
 - bash: |
     which bash
+    tmp=$(curl https://artifactory-unified.soleng-us.jfrog.team/xray/api/v1/system/ping)
+    echo $tmp
   displayName: Bash script
-
-- script: | 
-    .scripts/healthcheck.sh
-  displayName: curl Execute
