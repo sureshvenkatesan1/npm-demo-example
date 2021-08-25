@@ -15,20 +15,73 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- task: Npm@1
+- task: ArtifactoryNpm@2
   inputs:
-     command: 'install'
-  displayName: 'Download dependencies'
+    command: 'install'
+    artifactoryService: 'ArtifactorySaaS'
+    collectBuildInfo: true
+    buildName: '${Build.DefinitionName}' 
+    buildNumber: '${Build.BuildNumber}'
+    threads: '10'
+    includeEnvVars: true
+
+# - task: Npm@1
+#   inputs:
+#      command: 'install'
+#   displayName: 'Download dependencies'
 
 # - script: |
 #     npm install
 #   displayName: 'Download dependencies'
 
-- script: |
-    npm run build
-  displayName: 'Build'
+# - script: |
+#     npm run build
+#   displayName: 'Build'
 
 - script: |
-    npm pack
-  displayName: 'Package for release'
+    npm run pack
+  displayName: 'Build the package'
+
+- task: ArtifactoryGenericUpload@2
+  inputs:
+   artifactoryService: 'ArtifactorySaaS'
+   specSource: 'taskConfiguration'
+   fileSpec: |
+      {
+        "files": [
+          "pattern": "*.vsix",
+          "target": "npm"
+        ]
+      }
+   buildName: '${Build.DefinitionName}' 
+   buildNumber: '${Build.BuildNumber}'
+   module: "jfrog-vscode-extension:1.3.0"
+   includeEnvVars: true
+   failNoOp: true
+
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+   artifactoryService: 'ArtifactorySaaS'
+   buildName: '${Build.DefinitionName}' 
+   buildNumber: '${Build.BuildNumber}'
+  displayName: 'Publish buildInfo'
+
+- task: ArtifactoryXrayScan@1
+  inputs:
+   artifactoryService: 'ArtifactorySaaS'
+   buildName: '${Build.DefinitionName}' 
+   buildNumber: '${Build.BuildNumber}'
+   allowFailBuild: false
+  displayName: 'Build Scan'
+
+- task: ArtifactoryBuildPromotion@1
+  inputs:
+    artifactoryService: 'ArtifactorySaaS'
+    buildName: '${Build.DefinitionName}' 
+    buildNumber: '${Build.BuildNumber}'
+    targetRepo: 'alpha-npm-virtual'
+    status: 'Dev'
+    includeDependencies: false
+    copy: false
+    dryRun: false
 
