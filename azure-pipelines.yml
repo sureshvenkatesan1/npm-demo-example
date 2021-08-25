@@ -20,6 +20,7 @@ steps:
     command: 'install'
     artifactoryService: 'ArtifactorySaaS'
     collectBuildInfo: true
+    sourceRepo: 'npm'
     buildName: '${Build.DefinitionName}' 
     buildNumber: '${Build.BuildNumber}'
     threads: '10'
