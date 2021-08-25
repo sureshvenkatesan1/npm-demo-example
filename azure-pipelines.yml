@@ -15,9 +15,14 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
+- task: Npm@1
+  inputs:
+     command: 'install'
   displayName: 'Download dependencies'
+
+# - script: |
+#     npm install
+#   displayName: 'Download dependencies'
 
 - script: |
     npm run build
@@ -27,14 +32,3 @@ steps:
     npm pack
   displayName: 'Package for release'
 
-- bash: |
-    which bash
-    tmp=$(curl https://artifactory-unified.soleng-us.jfrog.team/xray/api/v1/system/ping)
-    echo $tmp
-  displayName: Healthcheck
-
-- bash: |
-    which bash
-    res=$(curl --location --request GET 'https://swampup201.jfrog.io/xray/api/v1/summary/build?build_name=npm_example_pipeline&build_number=61' --header 'Authorization: Basic bWFoYXJzaGlwOkFLQ3A4alFuSkt2ZjdvNW1XcHI4clFkUVlRa1BqbnU3NUpIcW5Cc1ZiR213VlAxdjJyZ0ZXcm5iM0FrMVhhZ0V6clhqOGZQcFg=' --data-raw '')
-    echo $res
-  displayName: Build Summary
