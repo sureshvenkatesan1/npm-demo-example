@@ -23,6 +23,7 @@ steps:
     sourceRepo: 'npm'
     buildName: '${Build.DefinitionName}' 
     buildNumber: '${Build.BuildNumber}'
+    threads: '5'
     includeEnvVars: true
 
 # - task: Npm@1
