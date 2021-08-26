@@ -19,12 +19,14 @@ steps:
   inputs:
     command: 'install'
     artifactoryService: 'ArtifactorySaaS'
-    sourceRepo: 'npm'
+    sourceRepo: 'alpha-npm-virtual'
     collectBuildInfo: true
-    threads: '5'
-    buildName: '${Build.DefinitionName}' 
-    buildNumber: '${Build.BuildNumber}'
+    threads: '3'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
     includeEnvVars: true
+
+
 
 # - task: Npm@1
 #   inputs:
