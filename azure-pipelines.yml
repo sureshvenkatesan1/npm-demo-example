@@ -75,14 +75,26 @@ steps:
     buildNumber: '$(Build.BuildNumber)'
     allowFailBuild: false
 
+# - task: ArtifactoryBuildPromotion@1
+#   inputs:
+#     artifactoryService: 'ArtifactorySaaS'
+#     buildName: '${Build.DefinitionName}' 
+#     buildNumber: '${Build.BuildNumber}'
+#     targetRepo: 'alpha-npm-virtual'
+#     status: 'Dev'
+#     includeDependencies: false
+#     copy: false
+#     dryRun: false
+
 - task: ArtifactoryBuildPromotion@1
   inputs:
     artifactoryService: 'ArtifactorySaaS'
-    buildName: '${Build.DefinitionName}' 
-    buildNumber: '${Build.BuildNumber}'
-    targetRepo: 'alpha-npm-virtual'
-    status: 'Dev'
-    includeDependencies: false
-    copy: false
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    targetRepo: 'alpha-npm-prod-local'
+    status: 'Released'
+    comment: 'ReadyForProd'
+    sourceRepo: 'alpha-npm-dev-local'
+    includeDependencies: true
+    copy: true
     dryRun: false
-
