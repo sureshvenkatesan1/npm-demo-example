@@ -35,13 +35,13 @@ steps:
 #     npm install
 #   displayName: 'Download dependencies'
 
-- script: |
-    npm run build
-  displayName: 'Build'
+# - script: |
+#     npm run build
+#   displayName: 'Build'
 
-- script: |
-    npm pack
-  displayName: 'Build the package'
+# - script: |
+#     npm pack
+#   displayName: 'Build the package'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
@@ -51,7 +51,7 @@ steps:
       {
               "files": [
                 {
-                  "pattern": "npm-example*",
+                  "pattern": "*",
                   "target": "alpha-npm-dev-local/"
                 }
               ]
@@ -64,11 +64,10 @@ steps:
 
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
-   artifactoryService: 'ArtifactorySaaS'
-   buildName: '${Build.DefinitionName}' 
-   buildNumber: '${Build.BuildNumber}'
-  displayName: 'Publish buildInfo'
-
+    artifactoryService: 'ArtifactorySaaS'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    
 - task: ArtifactoryXrayScan@1
   inputs:
    artifactoryService: 'ArtifactorySaaS'
