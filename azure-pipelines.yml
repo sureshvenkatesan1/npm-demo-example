@@ -53,7 +53,7 @@ steps:
       {
               "files": [
                 {
-                  "pattern": "*.tgz",
+                  "pattern": "npm-example*",
                   "target": "alpha-npm-dev-local/"
                 }
               ]
