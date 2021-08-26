@@ -70,11 +70,10 @@ steps:
 
 - task: ArtifactoryXrayScan@1
   inputs:
-   artifactoryService: 'ArtifactorySaaS'
-   buildName: '${Build.DefinitionName}' 
-   buildNumber: '${Build.BuildNumber}'
-   allowFailBuild: false
-  displayName: 'Build Scan'
+    artifactoryService: 'ArtifactorySaaS'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    allowFailBuild: false
 
 - task: ArtifactoryBuildPromotion@1
   inputs:
