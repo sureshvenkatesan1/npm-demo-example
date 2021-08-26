@@ -26,8 +26,6 @@ steps:
     buildNumber: '$(Build.BuildNumber)'
     includeEnvVars: true
 
-
-
 # - task: Npm@1
 #   inputs:
 #      command: 'install'
@@ -37,13 +35,13 @@ steps:
 #     npm install
 #   displayName: 'Download dependencies'
 
-# - script: |
-#     npm run build
-#   displayName: 'Build'
+- script: |
+    npm run build
+  displayName: 'Build'
 
-# - script: |
-#     npm pack
-#   displayName: 'Build the package'
+- script: |
+    npm pack
+  displayName: 'Build the package'
 
 - task: ArtifactoryGenericUpload@2
   inputs:
