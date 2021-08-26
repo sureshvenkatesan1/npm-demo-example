@@ -52,8 +52,10 @@ steps:
    fileSpec: |
       {
         "files": [
-          "pattern": "*.vsix",
-          "target": "npm"
+          {
+            "pattern": "*.vsix",
+            "target": "npm"
+          }
         ]
       }
    buildName: '${Build.DefinitionName}' 
