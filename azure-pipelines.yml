@@ -46,13 +46,6 @@ steps:
   displayName: 'Build the package'
 
 
-- task: ArtifactoryPublishBuildInfo@1
-  inputs:
-   artifactoryService: 'ArtifactorySaaS'
-   buildName: '${Build.DefinitionName}' 
-   buildNumber: '${Build.BuildNumber}'
-  displayName: 'Publish buildInfo'
-
 - task: ArtifactoryXrayScan@1
   inputs:
    artifactoryService: 'ArtifactorySaaS'
