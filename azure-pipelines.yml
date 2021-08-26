@@ -42,7 +42,7 @@ steps:
 #   displayName: 'Build'
 
 - script: |
-    npm run pack
+    npm pack
   displayName: 'Build the package'
 
 - task: ArtifactoryGenericUpload@2
