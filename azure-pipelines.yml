@@ -53,8 +53,8 @@ steps:
       {
               "files": [
                 {
-                  "pattern": "*.vsix",
-                  "target": "npm"
+                  "pattern": "*",
+                  "target": "alpha-npm-dev-local/"
                 }
               ]
       }
