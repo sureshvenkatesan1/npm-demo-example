@@ -21,7 +21,7 @@ steps:
     artifactoryService: 'ArtifactorySaaS'
     sourceRepo: 'alpha-npm-virtual'
     collectBuildInfo: true
-    threads: '3'
+    threads: '10'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
     includeEnvVars: true
@@ -53,7 +53,7 @@ steps:
       {
               "files": [
                 {
-                  "pattern": "*",
+                  "pattern": "*.tgz",
                   "target": "alpha-npm-dev-local/"
                 }
               ]
