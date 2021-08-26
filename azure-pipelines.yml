@@ -26,15 +26,6 @@ steps:
     buildNumber: '$(Build.BuildNumber)'
     includeEnvVars: true
 
-# - task: Npm@1
-#   inputs:
-#      command: 'install'
-#   displayName: 'Download dependencies'
-
-# - script: |
-#     npm install
-#   displayName: 'Download dependencies'
-
 - script: |
     npm run build
   displayName: 'Build'
@@ -74,17 +65,6 @@ steps:
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
     allowFailBuild: false
-
-# - task: ArtifactoryBuildPromotion@1
-#   inputs:
-#     artifactoryService: 'ArtifactorySaaS'
-#     buildName: '${Build.DefinitionName}' 
-#     buildNumber: '${Build.BuildNumber}'
-#     targetRepo: 'alpha-npm-virtual'
-#     status: 'Dev'
-#     includeDependencies: false
-#     copy: false
-#     dryRun: false
 
 - task: ArtifactoryBuildPromotion@1
   inputs:
