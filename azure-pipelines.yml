@@ -41,10 +41,35 @@ steps:
 #     npm run build
 #   displayName: 'Build'
 
-- script: |
-    npm pack
-  displayName: 'Build the package'
+# - script: |
+#     npm pack
+#   displayName: 'Build the package'
 
+- task: ArtifactoryGenericUpload@2
+  inputs:
+    artifactoryService: 'ArtifactorySaaS'
+    specSource: 'taskConfiguration'
+    fileSpec: |
+      {
+              "files": [
+                {
+                  "pattern": "*.vsix",
+                  "target": "npm"
+                }
+              ]
+      }
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
+    failNoOp: true
+
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+   artifactoryService: 'ArtifactorySaaS'
+   buildName: '${Build.DefinitionName}' 
+   buildNumber: '${Build.BuildNumber}'
+  displayName: 'Publish buildInfo'
 
 - task: ArtifactoryXrayScan@1
   inputs:
