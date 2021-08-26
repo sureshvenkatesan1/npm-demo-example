@@ -49,15 +49,6 @@ steps:
   inputs:
    artifactoryService: 'ArtifactorySaaS'
    specSource: 'taskConfiguration'
-   fileSpec: |
-      {
-        "files": [
-          {
-            "pattern": "*.vsix",
-            "target": "npm"
-          }
-        ]
-      }
    buildName: '${Build.DefinitionName}' 
    buildNumber: '${Build.BuildNumber}'
    module: "jfrog-vscode-extension:1.3.0"
