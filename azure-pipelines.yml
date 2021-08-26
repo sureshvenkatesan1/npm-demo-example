@@ -67,7 +67,7 @@ steps:
     artifactoryService: 'ArtifactorySaaS'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    
+
 - task: ArtifactoryXrayScan@1
   inputs:
    artifactoryService: 'ArtifactorySaaS'
