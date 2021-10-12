@@ -64,7 +64,7 @@ steps:
     artifactoryService: 'ArtifactorySaaS'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: false
+    allowFailBuild: true
 
 - task: ArtifactoryBuildPromotion@1
   inputs:
