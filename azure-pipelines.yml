@@ -18,7 +18,7 @@ steps:
 - task: ArtifactoryNpm@2
   inputs:
     command: 'install'
-    artifactoryService: 'ArtifactorySaaS'
+    artifactoryService: 'Artifactory'
     sourceRepo: 'alpha-npm-virtual'
     collectBuildInfo: true
     threads: '10'
@@ -36,7 +36,7 @@ steps:
 
 - task: ArtifactoryGenericUpload@2
   inputs:
-    artifactoryService: 'ArtifactorySaaS'
+    artifactoryService: 'Artifactory'
     specSource: 'taskConfiguration'
     fileSpec: |
       {
@@ -55,20 +55,20 @@ steps:
 
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
-    artifactoryService: 'ArtifactorySaaS'
+    artifactoryService: 'Artifactory'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
 
 - task: ArtifactoryXrayScan@1
   inputs:
-    artifactoryService: 'ArtifactorySaaS'
+    artifactoryService: 'Artifactory'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
     allowFailBuild: false
 
 - task: ArtifactoryBuildPromotion@1
   inputs:
-    artifactoryService: 'ArtifactorySaaS'
+    artifactoryService: 'Artifactory'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
     targetRepo: 'alpha-npm-prod-local'
