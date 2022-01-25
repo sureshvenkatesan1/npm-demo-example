@@ -18,7 +18,7 @@ steps:
 - task: ArtifactoryNpm@2
   inputs:
     command: 'install'
-    artifactoryService: 'Test Connection'
+    artifactoryService: 'Artifactory'
     sourceRepo: 'alpha-npm-virtual'
     collectBuildInfo: true
     threads: '10'
