@@ -23,5 +23,16 @@ steps:
 - script: |
     docker images
     ls -l src
-  displayName: 'Check up '
+  displayName: 'Check up'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'soleng_docker_registry'
+    repository: 'app1-docker-dev-local'
+    command: 'buildAndPush'
+    Dockerfile: './Dockerfile'
+    tags: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-java-webapp:$(Build.BuildNumber)'
 
+- script: |
+    docker images
+    ls -l src
+  displayName: 'Check up'
