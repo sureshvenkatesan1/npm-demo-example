@@ -20,15 +20,6 @@ steps:
     dockerVersion: '17.09.0-ce'
   displayName: 'Install Docker'
 
-#- task: ArtifactoryDocker@1
-#  inputs:
-#    command: 'pull'
-#    artifactoryService: 'soleng_jfrog_v1'
-#    sourceRepo: 'sv-docker-virtual'
-#    imageName: 'node:12-alpine'
-#    collectBuildInfo: true
-#    buildName: '$(Build.DefinitionName)'
-#    buildNumber: '$(Build.BuildNumber)'
 
 - task: JFrogDocker@1
   inputs:
@@ -66,7 +57,6 @@ steps:
 
 - script: |
     docker images
-    ls -l src
   displayName: 'Check up'
 
 - task: JFrogDocker@1
