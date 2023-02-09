@@ -30,7 +30,7 @@ steps:
     repository: 'app1-docker-dev-local'
     command: 'buildAndPush'
     Dockerfile: './Dockerfile'
-    tags: 'soleng.jfrog.io/app1-docker-dev-local/azure-npm-webapp:$(Build.BuildNumber)'
+    tags: 'azure-npm-webapp:$(Build.BuildNumber)'
 
 - script: |
     docker images
