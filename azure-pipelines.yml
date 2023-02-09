@@ -62,14 +62,13 @@ steps:
 - task: JFrogDocker@1
   inputs:
     command: 'Scan'
-    # imageName: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-npm-webapp:$(Build.BuildNumber)'
+    xrayConnection: 'soleng-xray'
     imageName: 'soleng.jfrog.io/sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
     watchesSource: 'watches'
     watches: 'a10_watch_severe_vuln'
-    allowFailBuild: false
+    allowFailBuild: true
     threads: '3'
     skipLogin: false
-    xrayConnection: 'soleng-xray'
    
 
 - task: JFrogPublishBuildInfo@1
@@ -80,9 +79,9 @@ steps:
 
 - task: JFrogBuildScan@1
   inputs:
+    xrayConnection: 'soleng-xray'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: false
+    allowFailBuild: true
     vuln: false
-    xrayConnection: 'soleng-xray'
     
