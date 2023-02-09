@@ -36,3 +36,13 @@ steps:
     docker images
     ls -l src
   displayName: 'Check up'
+
+- task: JFrogDocker@1
+  inputs:
+    command: 'Scan'
+    imageName: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-npm-webapp:$(Build.BuildNumber)'
+    watchesSource: 'watches'
+    watches: 'sv-azure-xray-watch'
+    allowFailBuild: true
+    threads: '3'
+    skipLogin: false
