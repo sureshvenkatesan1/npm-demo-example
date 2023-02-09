@@ -20,6 +20,16 @@ steps:
     dockerVersion: '17.09.0-ce'
   displayName: 'Install Docker'
 
+- task: JFrogDocker@1
+  inputs:
+    command: 'Pull'
+    artifactoryConnection: 'soleng_jfrog'
+    imageName: 'sv-docker-virtual/node:12-alpine'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    skipLogin: false
+    
 - script: |
     docker images
     ls -al
