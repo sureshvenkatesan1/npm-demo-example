@@ -10,71 +10,18 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: NodeTool@0
+- task: JFrogToolsInstaller@1
   inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
+    artifactoryConnection: 'soleng_jfrog'
+    cliInstallationRepo: 'jfrogcli-remote'
 
-- task: ArtifactoryNpm@2
+- task: DockerInstaller@0
   inputs:
-    command: 'install'
-    artifactoryService: 'Artifactory'
-    sourceRepo: 'alpha-npm-virtual'
-    collectBuildInfo: true
-    threads: '10'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    includeEnvVars: true
+    dockerVersion: '17.09.0-ce'
+  displayName: 'Install Docker'
 
-- script: |
-    npm run build
-  displayName: 'Build'
+  - script: |
+      docker images
+      ls -l src
+    displayName: 'Check up '
 
-- script: |
-    npm pack
-  displayName: 'Build the package'
-
-- task: ArtifactoryGenericUpload@2
-  inputs:
-    artifactoryService: 'Artifactory'
-    specSource: 'taskConfiguration'
-    fileSpec: |
-      {
-              "files": [
-                {
-                  "pattern": "npm-example*",
-                  "target": "alpha-npm-dev-local/"
-                }
-              ]
-      }
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    includeEnvVars: true
-    failNoOp: true
-
-- task: ArtifactoryPublishBuildInfo@1
-  inputs:
-    artifactoryService: 'Artifactory'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-
-- task: ArtifactoryXrayScan@1
-  inputs:
-    artifactoryService: 'Artifactory'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: false
-
-- task: ArtifactoryBuildPromotion@1
-  inputs:
-    artifactoryService: 'Artifactory'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    targetRepo: 'alpha-npm-prod-local'
-    status: 'Released'
-    comment: 'ReadyForProd'
-    sourceRepo: 'alpha-npm-dev-local'
-    includeDependencies: true
-    copy: true
-    dryRun: false
