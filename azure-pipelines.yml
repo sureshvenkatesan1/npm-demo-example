@@ -59,7 +59,8 @@ steps:
     allowFailBuild: false
     threads: '3'
     skipLogin: false
-    artifactoryConnection: 'soleng_jfrog'
+    xrayConnection: 'soleng-xray'
+   
 
 
 
@@ -69,5 +70,5 @@ steps:
     buildNumber: '$(Build.BuildNumber)'
     allowFailBuild: false
     vuln: false
-    xrayConnection: 'soleng_jfrog'
+    xrayConnection: 'soleng-xray'
     
