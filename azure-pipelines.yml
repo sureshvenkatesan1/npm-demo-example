@@ -22,7 +22,7 @@ steps:
 
 - script: |
     docker images
-    ls -l src
+    ls -al
   displayName: 'Check up'
 - task: Docker@2
   inputs:
