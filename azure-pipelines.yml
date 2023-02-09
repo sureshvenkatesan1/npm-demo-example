@@ -62,7 +62,11 @@ steps:
     xrayConnection: 'soleng-xray'
    
 
-
+- task: JFrogPublishBuildInfo@1
+  inputs:
+    artifactoryConnection: 'soleng_jfrog'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
 
 - task: JFrogBuildScan@1
   inputs:
