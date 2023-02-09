@@ -30,7 +30,7 @@ steps:
     repository: 'app1-docker-dev-local'
     command: 'buildAndPush'
     Dockerfile: './Dockerfile'
-    tags: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-java-webapp:$(Build.BuildNumber)'
+    tags: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-npm-webapp:$(Build.BuildNumber)'
 
 - script: |
     docker images
