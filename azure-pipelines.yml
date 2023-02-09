@@ -30,6 +30,15 @@ steps:
 #    buildName: '$(Build.DefinitionName)'
 #    buildNumber: '$(Build.BuildNumber)'
 
+- task: JFrogDocker@1
+  inputs:
+    command: 'Pull'
+    artifactoryConnection: 'soleng_jfrog'
+    imageName: 'soleng.jfrog.io/sv-docker-virtual/node:12-alpine'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    skipLogin: false
    
 - script: |
     docker images
@@ -48,7 +57,7 @@ steps:
   inputs:
     command: 'Push'
     artifactoryConnection: 'soleng_jfrog'
-    imageName: 'sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
+    imageName: 'soleng.jfrog.io/sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
@@ -64,7 +73,7 @@ steps:
   inputs:
     command: 'Scan'
     # imageName: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-npm-webapp:$(Build.BuildNumber)'
-    imageName: 'sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
+    imageName: 'soleng.jfrog.io/sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
     watchesSource: 'watches'
     watches: 'a10_watch_severe_vuln'
     allowFailBuild: false
