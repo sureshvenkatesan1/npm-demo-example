@@ -20,8 +20,8 @@ steps:
     dockerVersion: '17.09.0-ce'
   displayName: 'Install Docker'
 
-  - script: |
-      docker images
-      ls -l src
-    displayName: 'Check up '
+- script: |
+    docker images
+    ls -l src
+  displayName: 'Check up '
 
