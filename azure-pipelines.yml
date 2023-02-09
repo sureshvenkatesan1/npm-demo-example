@@ -66,7 +66,7 @@ steps:
     imageName: 'soleng.jfrog.io/sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
     watchesSource: 'watches'
     watches: 'a10_watch_severe_vuln'
-    allowFailBuild: true
+    allowFailBuild: false
     threads: '3'
     skipLogin: false
    
@@ -82,6 +82,6 @@ steps:
     xrayConnection: 'soleng-xray'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: true
+    allowFailBuild: false
     vuln: false
     
