@@ -24,14 +24,25 @@ steps:
     docker images
     ls -al
   displayName: 'Check up'
+
 - task: Docker@2
   inputs:
     containerRegistry: 'soleng_docker_registry'
-    repository: 'app1-docker-dev-local'
-    command: 'buildAndPush'
-    Dockerfile: './Dockerfile'
-    # tags: 'azure_npm_webapp:$(Build.BuildNumber)'
-    tags: 'test:1'
+    repository: 'sv-docker-virtual/azure_npm_webapp'
+    command: 'build'
+    Dockerfile: '$(Build.SourcesDirectory)/Dockerfile' 
+    tags: '$(Build.BuildNumber)'
+
+- task: JFrogDocker@1
+  inputs:
+    command: 'Push'
+    artifactoryConnection: 'soleng_jfrog'
+    imageName: 'sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    threads: '3'
+    skipLogin: false
 
 - script: |
     docker images
@@ -42,9 +53,21 @@ steps:
   inputs:
     command: 'Scan'
     # imageName: '$(DOCKER_REG)/$(DOCKER_REPO)/azure-npm-webapp:$(Build.BuildNumber)'
-    imageName: 'soleng.jfrog.io/app1-docker-dev-local/azure_npm_webapp:$(Build.BuildNumber)'
+    imageName: 'sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
     watchesSource: 'watches'
-    watches: 'sv-azure-xray-watch'
-    allowFailBuild: true
+    watches: 'a10_watch_severe_vuln'
+    allowFailBuild: false
     threads: '3'
     skipLogin: false
+    artifactoryConnection: 'soleng_jfrog'
+
+
+
+- task: JFrogBuildScan@1
+  inputs:
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    allowFailBuild: false
+    vuln: false
+    xrayConnection: 'soleng_jfrog'
+    
