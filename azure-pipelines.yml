@@ -12,6 +12,7 @@ pool:
 
 
 steps:
+# https://dev.to/rupeshtiwari/updating-azure-ci-pipeline-build-number-22f9
 - script: |
     echo "===== updating buildnumber ====="
     echo "##vso[build.updatebuildnumber]20230213.2"
