@@ -56,20 +56,7 @@ steps:
     Dockerfile: '$(Build.SourcesDirectory)/Dockerfile' 
     tags: '$(Build.BuildNumber)'
 
-- task: JFrogDocker@1
-  inputs:
-    command: 'Push'
-    artifactoryConnection: 'soleng_jfrog'
-    imageName: 'soleng.jfrog.io/sv-docker-virtual/azure_npm_webapp:$(Build.BuildNumber)'
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    threads: '3'
-    skipLogin: false
 
-- script: |
-    docker images
-  displayName: 'Check up'
 
 - task: JFrogDocker@1
   inputs:
