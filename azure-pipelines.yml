@@ -11,7 +11,7 @@ pool:
 
 variables:
   # buildNumber: '$(Date:yyyyMMdd)-$(Rev:r)'
-  buildNumber: '$(Date:yyyyMMdd)-18'
+  buildNumber: '20230209.18'
 
 
 steps:
