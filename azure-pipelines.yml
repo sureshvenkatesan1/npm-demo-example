@@ -9,10 +9,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-variables:
-  # buildNumber: '$(Date:yyyyMMdd)-$(Rev:r)'
-  buildNumber: '$(Date:yyyyMMdd)-18'
-
 
 steps:
 - task: JFrogToolsInstaller@1
